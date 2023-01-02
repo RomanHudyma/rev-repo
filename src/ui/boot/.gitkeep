@@ -1,0 +1,3 @@
+Directory that stores boot components
+Example: redux boot
+These components should wrap App component

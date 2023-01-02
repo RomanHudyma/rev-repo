@@ -1,0 +1,20 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
+export interface {{pascalCase name}}Props {}
+
+const {{camelCase name}} = <T extends {{pascalCase name}}Props = {{pascalCase name}}Props>(
+  WrappedComponent: React.ComponentType<T>,
+): React.FC<T> => {
+  const displayName =
+    WrappedComponent.displayName || WrappedComponent.name || 'Component';
+
+  const Component{{pascalCase name}} = (props: Omit<T, keyof {{pascalCase name}}Props>) => {
+    return <WrappedComponent {...(props as T)} />;
+  };
+
+  Component{{pascalCase name}}.displayName = `{{camelCase name}}(${displayName})`;
+
+  return Component{{pascalCase name}};
+};
+
+export default {{camelCase name}};

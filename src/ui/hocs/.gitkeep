@@ -1,0 +1,2 @@
+Directory that stores all hocs (higher-order components) that wrap your component and return new one
+Example: withAuth(Component, options) => withAuth(HomePage, { redirectTo: '/login' })

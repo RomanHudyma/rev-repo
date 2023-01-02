@@ -1,0 +1,5 @@
+Directory that stores 
+- global styles in index.scss
+- common styles in {style}.scss
+- reset.scss
+- _functions.scss, _variables_scss => merge them in main.scss

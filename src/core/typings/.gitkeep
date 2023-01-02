@@ -1,0 +1,6 @@
+Directory that stores some generic types. 
+Example:
+type MapCallback<InputItem = unknown, OutputItem = unknown> = (item: InputItem, index: number, items: InputItem[]) => OutputItem
+
+Types here supposed to be global, do not use export/import here, you can import some types in this way: 
+type A = import('library_name').A
