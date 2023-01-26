@@ -13,17 +13,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 
-const Copyright: React.FC<{ sx: object }> = ({ sx }) => {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" sx={sx}>
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        Rev Repo
-      </Link>{' '}
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-};
+import Copyright from '@components/Copyright';
 
 const theme = createTheme();
 
