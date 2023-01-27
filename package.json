@@ -46,6 +46,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@linkupst/eslint-config-react": "^1.0.9",
+    "@redux-devtools/extension": "^3.2.5",
     "@rtk-query/codegen-openapi": "^1.0.0",
     "@types/enzyme": "^3.10.9",
     "@types/jest": "^26.0.24",

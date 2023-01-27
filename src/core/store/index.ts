@@ -18,6 +18,7 @@ const makeStore = (opt?: ConfigureStoreOptions['preloadedState'] | undefined) =>
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(baseApi.middleware),
+    devTools: true,
     ...opt,
   });
 
