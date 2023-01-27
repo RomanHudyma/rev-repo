@@ -12,21 +12,36 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Copyright from '@components/Copyright';
+import { useIdentityControllerPostLoginMutation as useSignIn } from '@services/baseApi';
+import { setCredentials } from '@store/authSlice';
 
 const theme = createTheme();
 
 const SignIn = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const dispatch = useDispatch();
+  const [signUp] = useSignIn();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
+    const email = data.get('email') as string;
+    const password = data.get('password') as string;
 
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    try {
+      const { data: resData } = await signUp({
+        userLoginRequest: { email, password },
+      });
+
+      if (resData) {
+        dispatch(setCredentials({ ...resData, email, password }));
+      }
+    } catch (err) {
+      console.warn('err while ligon', err);
+    }
   };
 
   return (
@@ -92,7 +107,7 @@ const SignIn = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/sign-up" variant="body2">
                   Don&#39;t have an account? Sign Up
                 </Link>
               </Grid>

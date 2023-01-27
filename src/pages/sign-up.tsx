@@ -22,7 +22,7 @@ const theme = createTheme();
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const [signUp, { isLoading }] = useSignUp();
+  const [signUp] = useSignUp();
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>,
@@ -41,7 +41,9 @@ const SignUp = () => {
       });
 
       if (resData) {
-        dispatch(setCredentials(resData));
+        dispatch(
+          setCredentials({ ...resData, email, password, firstName, lastName }),
+        );
       }
     } catch (err) {
       console.warn('err while registration', err);
