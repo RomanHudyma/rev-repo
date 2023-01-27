@@ -1,9 +1,24 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  ThunkAction,
+  Action,
+  ConfigureStoreOptions,
+} from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 
-const makeStore = () =>
+import { baseApi } from '@services/baseApi';
+
+import auth from './authSlice';
+
+const makeStore = (opt?: ConfigureStoreOptions['preloadedState'] | undefined) =>
   configureStore({
-    reducer: {},
+    reducer: {
+      [baseApi.reducerPath]: baseApi.reducer,
+      auth,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(baseApi.middleware),
+    ...opt,
   });
 
 export type AppStore = ReturnType<typeof makeStore>;
