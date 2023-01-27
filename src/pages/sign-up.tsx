@@ -12,21 +12,40 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Copyright from '@components/Copyright';
+import { useIdentityControllerPostRegisterMutation as useSignUp } from '@services/baseApi';
+import { setCredentials } from '@store/authSlice';
 
 const theme = createTheme();
 
 const SignUp = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const dispatch = useDispatch();
+  const [signUp, { isLoading }] = useSignUp();
+
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
+    const email = data.get('email') as string;
+    const password = data.get('password') as string;
+    const firstName = data.get('firstName') as string;
+    const lastName = data.get('lastName') as string;
 
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    try {
+      const { data: resData } = await signUp({
+        userRegistrationRequest: { email, password, firstName, lastName },
+      });
+
+      if (resData) {
+        dispatch(setCredentials(resData));
+      }
+    } catch (err) {
+      console.warn('err while registration', err);
+    }
   };
 
   return (
@@ -115,7 +134,7 @@ const SignUp = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/sign-in" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
