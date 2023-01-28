@@ -345,3 +345,8 @@ export const {
   useProductControllerPutProductImageMutation,
   useSampleControllerGetHelloQuery,
 } = injectedRtkApi;
+
+export const {
+  productControllerGetAllProducts,
+  categoryControllerGetAllCategories,
+} = injectedRtkApi.endpoints;
