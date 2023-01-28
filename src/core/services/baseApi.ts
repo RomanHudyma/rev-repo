@@ -1,4 +1,5 @@
 import baseApi from './emptyApi';
+
 const injectedRtkApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     categoryControllerGetAllCategories: build.query<
@@ -31,7 +32,7 @@ const injectedRtkApi = baseApi.injectEndpoints({
       CategoryControllerDeleteCategoryApiResponse,
       CategoryControllerDeleteCategoryApiArg
     >({
-      query: (queryArg) => ({
+      query: () => ({
         url: `/api/v1/categories/category`,
         method: 'DELETE',
       }),
