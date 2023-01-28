@@ -10,15 +10,13 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 
-import Copyright from '@components/Copyright';
+import Copyright from '@components/common/Copyright';
+import HeadComponent from '@components/common/Head';
 import { useIdentityControllerPostLoginMutation as useSignIn } from '@services/baseApi';
 import { setCredentials } from '@store/authSlice';
-
-const theme = createTheme();
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -45,7 +43,8 @@ const SignIn = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
+      <HeadComponent title="Sign In" />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -116,7 +115,7 @@ const SignIn = () => {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
+    </>
   );
 };
 

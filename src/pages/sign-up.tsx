@@ -10,15 +10,13 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 
-import Copyright from '@components/Copyright';
+import Copyright from '@components/common/Copyright';
+import HeadComponent from '@components/common/Head';
 import { useIdentityControllerPostRegisterMutation as useSignUp } from '@services/baseApi';
 import { setCredentials } from '@store/authSlice';
-
-const theme = createTheme();
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -51,7 +49,8 @@ const SignUp = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
+      <HeadComponent title="Sign Up" />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -145,7 +144,7 @@ const SignUp = () => {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
+    </>
   );
 };
 
