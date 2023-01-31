@@ -2,7 +2,6 @@ import HeadComponent from '@components/common/Head';
 import {
   productControllerGetAllProducts,
   categoryControllerGetAllCategories,
-  getRunningQueriesThunk,
   ProductResponsePaginatedList,
   Category,
 } from '@services/baseApi';
@@ -30,8 +29,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
     );
 
     const productList = resProductList.data;
-
-    // await Promise.all(store.dispatch(getRunningQueriesThunk()));
 
     return {
       props: {

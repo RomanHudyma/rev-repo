@@ -345,7 +345,6 @@ export const {
   useProductControllerPutProductMutation,
   useProductControllerPutProductImageMutation,
   useSampleControllerGetHelloQuery,
-  util: { getRunningQueriesThunk },
 } = injectedRtkApi;
 
 export const {
