@@ -20,7 +20,7 @@ import { setCredentials } from '@store/authSlice';
 
 const SignIn = () => {
   const dispatch = useDispatch();
-  const [signUp] = useSignIn();
+  const [signIn] = useSignIn();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,7 +30,7 @@ const SignIn = () => {
     const password = data.get('password') as string;
 
     try {
-      const { data: resData } = await signUp({
+      const { data: resData } = await signIn({
         userLoginRequest: { email, password },
       });
 
@@ -38,7 +38,7 @@ const SignIn = () => {
         dispatch(setCredentials({ ...resData, email, password }));
       }
     } catch (err) {
-      console.warn('err while ligon', err);
+      console.warn('err while login', err);
     }
   };
 
