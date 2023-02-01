@@ -2,7 +2,7 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 
-const Copyright: React.FC<{ sx: object }> = ({ sx }) => {
+const Copyright: React.FC<{ sx?: object }> = ({ sx }) => {
   return (
     <Typography variant="body2" color="text.secondary" align="center" sx={sx}>
       {'Copyright © '}
