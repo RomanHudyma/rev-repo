@@ -13,11 +13,11 @@ interface Props {
   productList: ProductResponsePaginatedList;
 }
 
-const Home: React.FC<Props> = ({ categories }) => {
+const Home: React.FC<Props> = ({ categories, productList }) => {
   return (
     <>
       <HeadComponent title="Welcome" />
-      <HomeView categories={categories} />
+      <HomeView categories={categories} productsList={productList} />
     </>
   );
 };

@@ -2,20 +2,23 @@ import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import Pagination from '@mui/material/Pagination';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import {
   Category,
+  ProductResponsePaginatedList,
   useProductControllerGetAllProductsQuery as useProducts,
 } from '@services/baseApi';
 import Layout from '@views/Layout';
 
 interface HomeViewProps {
   categories: Category[];
+  productsList: ProductResponsePaginatedList;
 }
 
-const HomeView: React.FC<HomeViewProps> = ({ categories }) => {
+const HomeView: React.FC<HomeViewProps> = ({ categories, productsList }) => {
   const [selectedCategory, setCategory] = useState<number | undefined>(
     categories?.[0]?.id,
   );
@@ -34,13 +37,19 @@ const HomeView: React.FC<HomeViewProps> = ({ categories }) => {
     },
   );
 
-  useEffect(() => {
-    console.log('data', data);
-  }, [data]);
-
   const handleChange = (e: SelectChangeEvent<number>) => {
     setCategory(e.target.value as number);
   };
+
+  const productsData = useMemo(
+    () =>
+      (selectedCategory === undefined ||
+        selectedCategory === categories?.[0]?.id) &&
+      page === 1
+        ? productsList
+        : data,
+    [page, selectedCategory, categories, productsList, data],
+  );
 
   return (
     <Layout>
@@ -69,7 +78,35 @@ const HomeView: React.FC<HomeViewProps> = ({ categories }) => {
           </FormControl>
         </Grid>
       </Grid>
-      <Grid container columns={4} />
+      <Grid
+        container
+        columns={12}
+        alignItems="center"
+        justifyContent="center"
+        sx={{ paddingY: '3rem' }}
+      >
+        {productsData?.items?.map((item) => (
+          <Grid
+            item
+            key={item.id}
+            xs={3}
+            sx={{ paddingBottom: '1.5rem', paddingX: '1.5rem' }}
+          >
+            {item.name}
+          </Grid>
+        ))}
+      </Grid>
+      {productsData?.totalPages > 1 && (
+        <Grid container direction="row" justifyContent="center">
+          <Pagination
+            variant="outlined"
+            onChange={(e, p) => setPage(p)}
+            count={productsData?.totalPages}
+            hideNextButton={page === productsData?.totalPages}
+            hidePrevButton={page === 1}
+          />
+        </Grid>
+      )}
     </Layout>
   );
 };
