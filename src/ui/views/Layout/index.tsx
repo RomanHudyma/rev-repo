@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import React from 'react';
 
 import Copyright from '@components/common/Copyright';
+import Header from '@components/common/Header';
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[];
@@ -13,6 +14,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => (
   <>
     <CssBaseline />
+    <Header />
     <Container
       component="main"
       maxWidth="xl"

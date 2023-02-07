@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -20,6 +21,7 @@ import { setCredentials } from '@store/authSlice';
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [signUp] = useSignUp();
 
   const handleSubmit = async (
@@ -42,6 +44,7 @@ const SignUp = () => {
         dispatch(
           setCredentials({ ...resData, email, password, firstName, lastName }),
         );
+        router.push('/');
       }
     } catch (err) {
       console.warn('err while registration', err);

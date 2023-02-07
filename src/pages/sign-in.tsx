@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -20,6 +21,7 @@ import { setCredentials } from '@store/authSlice';
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [signIn] = useSignIn();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -36,6 +38,7 @@ const SignIn = () => {
 
       if (resData) {
         dispatch(setCredentials({ ...resData, email, password }));
+        router.push('/');
       }
     } catch (err) {
       console.warn('err while login', err);
