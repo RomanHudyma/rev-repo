@@ -3,9 +3,14 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
 import { AppState } from '@store/index';
+import { pushNotification } from '@utils/indexedDB/queries';
 
 const Header: FC = () => {
   const user = useSelector((state: AppState) => state.auth);
+
+  const handlePushNotification = () => {
+    pushNotification('warning', 'NOTIFICATION TEXT');
+  };
 
   return (
     <header>
@@ -26,7 +31,16 @@ const Header: FC = () => {
             justifyContent="space-between"
           >
             <Grid item>
-              <Typography component="h2">{document.title}</Typography>
+              <Typography component="h2">App Title</Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={handlePushNotification}
+                variant="contained"
+                color="info"
+              >
+                Push Notification
+              </Button>
             </Grid>
             <Grid item>
               {user.token ? (

@@ -4,6 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import React from 'react';
 
+import NotificationControl from '@components/NotificationControl';
 import Copyright from '@components/common/Copyright';
 import Header from '@components/common/Header';
 
@@ -13,6 +14,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => (
   <>
+    <NotificationControl />
     <CssBaseline />
     <Header />
     <Container
