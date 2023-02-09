@@ -21,7 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
       component="main"
       maxWidth="xl"
       sx={{
-        minHeight: 'calc(100vh - 52px)',
+        minHeight: 'calc(100vh - 68px - 52px)',
         paddingTop: '2rem',
         paddingBottom: '2rem',
       }}
