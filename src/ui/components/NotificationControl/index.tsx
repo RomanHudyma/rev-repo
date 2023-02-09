@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useSnackbar } from 'notistack';
+import React, { useEffect } from 'react';
 
 import db from '@utils/indexedDB';
 import { Notification } from '@utils/indexedDB/types';
 
 const NotificationControl: React.FC = () => {
-  const [showToast, setShowToast] = useState(false);
-  const [toastData, setToastData] = useState<Notification>();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleCreatingNotification = (primKey: string, obj: Notification) => {
-    setShowToast(true);
-    setToastData(obj);
-    console.log('obj', obj);
+    enqueueSnackbar(obj.message, { variant: obj.type });
   };
 
   useEffect(() => {
@@ -21,7 +19,7 @@ const NotificationControl: React.FC = () => {
     };
   }, []);
 
-  return <div />;
+  return null;
 };
 
 export default NotificationControl;

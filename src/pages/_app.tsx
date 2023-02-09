@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
+import { SnackbarProvider } from 'notistack';
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 
@@ -27,7 +28,9 @@ const App = ({ Component, ...pageProps }: AppProps) => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <Component {...props.pageProps} />
+        <SnackbarProvider maxSnack={3}>
+          <Component {...props.pageProps} />
+        </SnackbarProvider>
       </ThemeProvider>
     </Provider>
   );
