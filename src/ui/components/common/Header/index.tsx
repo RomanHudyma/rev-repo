@@ -4,12 +4,13 @@ import { useSelector } from 'react-redux';
 
 import { AppState } from '@store/index';
 import { pushNotification } from '@utils/indexedDB/queries';
+import { NotificationType } from '@utils/indexedDB/types';
 
 const Header: FC = () => {
   const user = useSelector((state: AppState) => state.auth);
 
-  const handlePushNotification = () => {
-    pushNotification('warning', 'NOTIFICATION TEXT');
+  const handlePushNotification = (type: NotificationType) => {
+    pushNotification(type, 'NOTIFICATION TEXT');
   };
 
   return (
@@ -35,11 +36,26 @@ const Header: FC = () => {
             </Grid>
             <Grid item>
               <Button
-                onClick={handlePushNotification}
+                onClick={() => handlePushNotification('warning')}
                 variant="contained"
-                color="info"
+                color="warning"
               >
-                Push Notification
+                Push Warning
+              </Button>
+              <Button
+                onClick={() => handlePushNotification('success')}
+                variant="contained"
+                color="success"
+                sx={{ marginX: '1rem' }}
+              >
+                Push Success
+              </Button>
+              <Button
+                onClick={() => handlePushNotification('error')}
+                variant="contained"
+                color="error"
+              >
+                Push Error
               </Button>
             </Grid>
             <Grid item>
