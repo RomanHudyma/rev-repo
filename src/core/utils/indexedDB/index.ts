@@ -7,8 +7,8 @@ export class IndexedDB extends Dexie {
 
   constructor(name: string) {
     super(name);
-    this.version(5).stores({
-      notifications: '++id',
+    this.version(1).stores({
+      notifications: '++id, timestamp',
     });
   }
 }

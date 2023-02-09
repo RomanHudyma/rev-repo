@@ -10,6 +10,13 @@ export const pushNotification = async (
   message: string,
 ): Promise<void> => {
   const id = uuidv4();
+  const timestamp = Date.now();
 
-  await db.notifications.put({ id, type, message }, id);
+  await db.notifications.put({ id, type, message, timestamp }, id);
+};
+
+export const cleanUpDB = async (): Promise<void> => {
+  const weekAgo = new Date(Date.now() - 60 * 60 * 1000 * 24 * 7);
+
+  await db.notifications.where('timestamp').below(weekAgo).delete();
 };

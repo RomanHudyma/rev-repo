@@ -1,9 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
+import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 
 import { wrapper } from '@store/.';
+import { cleanUpDB } from '@utils/indexedDB/queries';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -17,6 +19,10 @@ const theme = createTheme({
 
 const App = ({ Component, ...pageProps }: AppProps) => {
   const { store, props } = wrapper.useWrappedStore(pageProps);
+
+  useEffect(() => {
+    cleanUpDB();
+  }, []);
 
   return (
     <Provider store={store}>
